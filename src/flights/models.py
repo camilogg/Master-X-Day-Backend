@@ -28,7 +28,7 @@ class Flight(models.Model):
     departure_date = models.DateField()
     departure_time = models.TimeField()
     flight_number = models.PositiveSmallIntegerField()
-    boarding_gate = models.PositiveSmallIntegerField()
+    boarding_gate = models.CharField(max_length=20)
     passengers_limit = models.PositiveSmallIntegerField()
     origin = models.ForeignKey(
         City, on_delete=models.CASCADE, related_name='origins'
@@ -45,9 +45,19 @@ class Flight(models.Model):
     def __str__(self):
         return f'Flight #{self.id}'
 
+class Client(models.Model):
+    name = models.CharField(max_length=255)
+
+    class Meta:
+        verbose_name = 'client'
+        verbose_name_plural = 'clients'
+    
+    def __str__(self):
+        return self.name
+
 
 class PassengerByFlight(models.Model):
-    passenger = models.ForeignKey(User, on_delete=models.CASCADE)
+    passenger = models.ForeignKey(Client, on_delete=models.CASCADE)
     flight = models.ForeignKey(Flight, on_delete=models.CASCADE)
 
     class Meta:
@@ -56,3 +66,5 @@ class PassengerByFlight(models.Model):
 
     def __str__(self):
         return f'PassengerByFlight #{self.pk}'
+
+
