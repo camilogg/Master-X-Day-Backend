@@ -45,7 +45,3 @@ class PassengerModelViewSet(ModelViewSet):
     serializer_class = PassengerSerializer
     queryset = User.objects.all()
     permission_classes = (AllowAny,)
-
-
-def prueba(request):
-    return HttpResponse('prueba')
