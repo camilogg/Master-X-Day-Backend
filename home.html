@@ -22,22 +22,22 @@
                     
                     <div class="row">
                         <div class="col-md-1 head">
-                            <h4>Id</h4>
+                            <h4>Id Flight</h4>
                         </div>
                         <div class="col-md-1 head">
-                            <h4>Origen</h4>
+                            <h4>Origin</h4>
                         </div>
                         <div class="col-md-1 head">
-                            <h4>Destino</h4>
+                            <h4>Destination</h4>
                         </div>
                         <div class="col-md-1 head">
-                            <h4>Fecha</h4>
+                            <h4>Date</h4>
                         </div>
                         <div class="col-md-1 head">
-                            <h4>Tiempo</h4>
+                            <h4>Time</h4>
                         </div>
                         <div class="col-md-1 head">
-                            <h4>Pasajeros</h4>
+                            <h4>Passengers</h4>
                         </div>
                         <div class="col-md-1 head">
                             <h4>Status</h4>
@@ -58,36 +58,25 @@
                 <form action="" method="post">
 
                     <div class="mb-3" id="idvuelos">
-                        
+                    </div>
+
+                    <div class="mb-3" id="origin">
+                    </div>
+
+                    <div class="mb-3" id="destination">
                     </div>
 
                     <div class="mb-3">
-                        <label for="exampleInputEmail1" class="form-label">Origen</label>
-                        <input type="text" class="form-control" name="origen">
+                        <label for="departure_date" class="form-label">Departure Date</label>
+                        <input type="text" class="form-control" name="departure_date">
                     </div>
 
                     <div class="mb-3">
-                        <label for="exampleInputEmail1" class="form-label">Destino</label>
-                        <input type="text" class="form-control" name="destino">
+                        <label for="departure_time" class="form-label">Departure Time</label>
+                        <input type="text" class="form-control" name="departure_time">
                     </div>
 
-                    <div class="mb-3">
-                        <label for="exampleInputEmail1" class="form-label">Fecha</label>
-                        <input type="text" class="form-control" name="fecha">
-                    </div>
-
-                    <div class="mb-3">
-                        <label for="exampleInputEmail1" class="form-label">Tiempo</label>
-                        <input type="text" class="form-control" name="tiempo">
-                    </div>
-
-                    <div class="mb-3">
-                        <label for="exampleInputEmail1" class="form-label">status</label>
-                        <select name="status" id="status" class="form-control">
-                            <option selected value="0" disabled> Elige una opción </option>
-                            <option value="delayed">delayed </option>
-                            <option value="ontime">on time</option>
-                        </select> 
+                    <div class="mb-3" id="datastatus">
                     </div>
 
                     <input type="submit" value="Submit">
