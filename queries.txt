@@ -1,10 +1,14 @@
--- AeroPlatzi's routes and times with the highest traffic.
+**
+[16:48]
+-- AeroPlatzi's routes and times with the highest traffic
 SELECT ori.city_name 'Origin', dest.city_name 'Destination', departure_date, departure_time, COUNT() 'Flights'
 FROM flights f
     INNER JOIN cities ori ON ori.cities_id = f.origin_id
     INNER JOIN cities dest ON dest.cities_id = f.destination_id
+    INNER JOIN flight_status fs ON f.flight_status_id = fs.status_id
+WHERE fs.NAME IN ('ON-TIME', 'IN-FLIGHT', 'ENDED')
 GROUP BY ori.city_name, dest.city_name
-ORDER BY ori.city_name 'Origin', dest.city_name 'Destination', departure_date, departure_time DESC;
+ORDER BY ori.city_name, dest.city_name, departure_date, departure_time DESC;
 
 
 -- Least frequent routs of the last 8 hours
@@ -12,7 +16,9 @@ SELECT ori.city_name 'Origin', dest.city_name 'Destination', COUNT()
 FROM flights f
     INNER JOIN cities ori ON ori.cities_id = f.origin_id
     INNER JOIN cities dest ON dest.cities_id = f.destination_id
-WHERE departure_time BETWEEN DATE_ADD(CURRENT_TIME(), INTERVAL -8 HOUR) AND CURRENT_TIME()
+    INNER JOIN flight_status fs ON f.flight_status_id = fs.status_id
+WHERE   fs.NAME IN ('ON-TIME', 'IN-FLIGHT', 'ENDED') 
+AND     departure_time BETWEEN DATE_ADD(CURRENT_TIME(), INTERVAL -8 HOUR) AND CURRENT_TIME()
 ORDER BY ori.city_name, dest.city_name ASC;
 
 
@@ -21,6 +27,7 @@ SELECT ori.city_name 'Origin', dest.city_name 'Destination', (SELECT COUNT(*) FR
 FROM flights f
     INNER JOIN cities ori ON ori.cities_id = f.origin_id
     INNER JOIN cities dest ON dest.cities_id = f.destination_id
-    -- Inner join passengers_by_flight pbf ON f.flight_id = pbf.flight_id
-WHERE departure_date BETWEEN DATE_ADD(CURRENT_DATE(), INTERVAL -7 DAY) AND CURRENT_TIME()
+    INNER JOIN flight_status fs ON f.flight_status_id = fs.status_id
+WHERE   fs.NAME IN ('ON-TIME', 'IN-FLIGHT', 'ENDED')
+AND     departure_date BETWEEN DATE_ADD(CURRENT_DATE(), INTERVAL -7 DAY) AND CURRENT_TIME()
 ORDER BY ori.city_name, dest.city_name ASC;
