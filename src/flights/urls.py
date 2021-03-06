@@ -5,7 +5,7 @@ from flights.viewsets import (
     FlightModelViewSet,
     PassengerModelViewSet,
     FlightStatusModelViewSet,
-    CityModelViewSet, prueba
+    CityModelViewSet
 )
 
 router = SimpleRouter()
@@ -17,5 +17,4 @@ router.register('passengers', PassengerModelViewSet)
 app_name = 'flights'
 urlpatterns = [
     path('', include(router.urls)),
-    path('prueba/', prueba),
 ]
