@@ -28,7 +28,7 @@ class Flight(models.Model):
     departure_date = models.DateField()
     departure_time = models.TimeField()
     flight_number = models.PositiveSmallIntegerField()
-    boarding_gate = models.CharField(max_length=5)
+    boarding_gate = models.CharField(max_length=4)
     passengers_limit = models.PositiveSmallIntegerField()
     origin = models.ForeignKey(
         City, on_delete=models.CASCADE, related_name='origins'
