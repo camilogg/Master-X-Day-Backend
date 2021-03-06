@@ -1,88 +1,15 @@
 $(document).ready(init);
 
-            function init(){
-                console.log('get info');
+            async function init(){
+                
+                const url = "https://url/api/flights"
+                const response = await fetch(url);
+                const data = await response.json();
 
-                data_flights = [
-                    {
-                        "id": 1,
-                        "departure_date": "2021-03-06",
-                        "departure_time": "16:17:39",
-                        "flight_number": 234,
-                        "boarding_gate": 123,
-                        "passengers_limit": 100,
-                        "origin": {
-                          "id": 4,
-                          "name": "Villavicencio"
-                        },
-                        "destination": {
-                          "id": 2,
-                          "name": "Medellín"
-                        },
-                        "status": {
-                          "id": 2,
-                          "name": "boarding"
-                        }
-                      },
-                      {
-                        "id": 2,
-                        "departure_date": "2021-03-06",
-                        "departure_time": "16:17:39",
-                        "flight_number": 234,
-                        "boarding_gate": 123,
-                        "passengers_limit": 100,
-                        "origin": {
-                          "id": 4,
-                          "name": "Mexico"
-                        },
-                        "destination": {
-                          "id": 2,
-                          "name": "Colombia"
-                        },
-                        "status": {
-                          "id": 2,
-                          "name": "boarding"
-                        }
-                      }
-                ]
 
-                data_status = [
-                    {
-                      "id": 1,
-                      "name": "delayed"
-                    },
-                    {
-                      "id": 2,
-                      "name": "on-time"
-                    }
-                ]
-
-                data_cities = [
-                    {
-                      "id": 1,
-                      "name": "Mexico City"
-                    },
-                    {
-                      "id": 2,
-                      "name": "Bogotá"
-                    }
-                ]
-
-                // $.get('URL',function(data){
-                //     setlist(data_flights);
-                // });
-
-                // $.get('URL',function(data){
-                //     setlist(data_status);
-                // });
-
-                // $.get('URL',function(data){
-                //     setlist(data_cities);
-                // });
-
-                setlist(data_flights);
-                setDataStatus(data_status);
-                setDataOrigin(data_cities);
+                setlist(data.results);
+                // setDataStatus(data_status);
+                // setDataOrigin(data_cities);
             }
 
             function setlist(data){
@@ -106,8 +33,8 @@ $(document).ready(init);
 
             function setDataStatus(data){
                 elemento = `
-                    <label for="exampleInputEmail1" class="form-label">Status</label>
-                    <select name="status_id" id="id" class="form-control">
+                    <label for="status" class="form-label">Status</label>
+                    <select name="status" id="status" class="form-control">
                     <option selected value="0" disabled> Elige una opción </option>`
                 ;
                 for (let index = 0; index < data.length; index++) {
