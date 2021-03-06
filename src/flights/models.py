@@ -3,7 +3,7 @@ from django.db import models
 
 
 class City(models.Model):
-    name = models.CharField(max_length=255)
+    name = models.CharField(max_length=255, unique=True)
 
     class Meta:
         verbose_name = 'city'
@@ -14,7 +14,7 @@ class City(models.Model):
 
 
 class FlightStatus(models.Model):
-    name = models.CharField(max_length=255)
+    name = models.CharField(max_length=255, unique=True)
 
     class Meta:
         verbose_name = 'flight status'
