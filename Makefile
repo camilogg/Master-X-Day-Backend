@@ -7,3 +7,6 @@ superuser:
 
 test:
 	docker-compose exec aeroplatzi ./manage.py test
+
+statics:
+	docker-compose exec aeroplatzi ./manage.py collectstatic --no-input

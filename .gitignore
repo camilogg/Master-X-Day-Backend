@@ -1,3 +1,5 @@
 postgres-data/
 .idea
 .env
+
+src/aeroplatzi/static/

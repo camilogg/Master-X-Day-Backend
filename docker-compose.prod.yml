@@ -10,7 +10,7 @@ services:
 
   aeroplatzi:
     build: ./src
-    command: python manage.py runserver 0.0.0.0:8000
+    command: uwsgi --ini uwsgi.ini
     env_file: .env
     volumes:
       - ./src:/src
