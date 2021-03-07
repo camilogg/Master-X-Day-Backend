@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Flight</title>
+</head>
+<body>
+    <div>
+       <h4 id="message"></h4> 
+    </div>
+    <h1>Create a Flight</h1>
+
+    <form id="form">
+
+        <div class="mb-3">
+            <label for="departure_date" class="form-label">Flight Number</label>
+            <input type="text" class="form-control" id="flight_number" name="flight_number">
+        </div>
+
+        <div class="mb-3">
+            <label for="origin" class="form-label">Origin</label>
+            <select name="origin" id="origin">
+                <option value="1">Puerto Vallarta</option>
+                <option value="2">Medellin</option>
+                <option value="3">New York</option>
+            </select>
+        </div>
+
+        <div class="mb-3">
+            <label for="destination class="form-label">Destination</label>
+            <select name="destination" id="destination">
+                <option value="1">Puerto Vallarta</option>
+                <option value="2">Medellin</option>
+                <option value="3">New York</option>
+            </select>
+        </div>
+
+        <div class="mb-3">
+            <label for="departure_date" class="form-label">Departure Date</label>
+            <input type="text" class="form-control" name="departure_date">
+        </div>
+
+        <div class="mb-3">
+            <label for="departure_time" class="form-label">Departure Time</label>
+            <input type="text" class="form-control" name="departure_time">
+        </div>
+
+        <div class="mb-3" id="datastatus">
+        </div>
+
+        <input type="submit" value="Submit">
+      </form>
+
+      <script type="text/javascript">
+        const form = document.getElementById('form');
+        form.addEventListener('submit', create);
+
+        function create() {
+            const data = new FormData(document.getElementById('form'));
+            console.log(data)
+            fetch('http://159.89.32.176/api/flights/', {
+            method: 'POST',
+            body: data
+            })
+            .then(function(response) {
+            if(response.ok) {
+                console.log("ok")
+                const message = document.getElementById("message")
+                message.value = "Flight created"
+            } else {
+                console.log("error")
+                const message = document.getElementById("message")
+                message.value = "There was an error"
+            }
+
+            })
+            .catch(function(err) {
+                console.log("error")
+                const message = document.getElementById("message")
+                message.value = "There was an error"
+            }); 
+        }
+        
+    </script>
+</body>
+</html>
