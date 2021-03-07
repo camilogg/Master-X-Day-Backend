@@ -1,16 +1,30 @@
 $(document).ready(init);
 
-            async function init(){
-                
-                const url = "https://url/api/flights"
-                const response = await fetch(url);
-                const data = await response.json();
 
+
+    
+            async function init(){
+
+                test();
+                
+                const url1 = "http://159.89.32.176/api/flights"
+                const response1 = await fetch(url1);
+                const data = await response1.json();
 
                 setlist(data.results);
-                // setDataStatus(data_status);
-                // setDataOrigin(data_cities);
+
+                const url2 = "http://159.89.32.176/api/flight-statuses"
+                const response2 = await fetch(url2);
+                const data_status = await response2.json();
+                setDataStatus(data_status.results);
+
+                const url3 = "http://159.89.32.176/api/cities"
+                const response3 = await fetch(url3);
+                const data_cities = await response3.json();
+                setDataOrigin(data_cities.results);
+                setDataDestination(data_cities.results);
             }
+
 
             function setlist(data){
                 $.each(data,createListItem);
@@ -21,7 +35,7 @@ $(document).ready(init);
                 elemento = `
                     <label for="exampleInputEmail1" class="form-label">id</label>
                     <select name="id" id="id" class="form-control">
-                    <option selected value="0" disabled> Elige una opción </option>`
+                    <option selected value="0" disabled> Select </option>`
                 ;
                 
                 for (let index = 0; index < data.length; index++) {
@@ -31,11 +45,18 @@ $(document).ready(init);
                 $('#idvuelos').append(elemento);
             }
 
+            function test(){
+                console.log('ok')
+                $.get('http://159.89.32.176/api/flights',function(data){
+                    console.log('prueba flights',data)
+                });
+            }
+
             function setDataStatus(data){
                 elemento = `
                     <label for="status" class="form-label">Status</label>
                     <select name="status" id="status" class="form-control">
-                    <option selected value="0" disabled> Elige una opción </option>`
+                    <option selected value="0" disabled> Select </option>`
                 ;
                 for (let index = 0; index < data.length; index++) {
                     elemento = elemento + `<option value="`+data[index].id+`"> `+data[index].name+ ` </option>`;
@@ -48,7 +69,7 @@ $(document).ready(init);
                 elemento = `
                 <label for="destination_id" class="form-label">Destination</label>
                     <select name="id_destination" id="id" class="form-control">
-                    <option selected value="0" disabled> Elige una opción </option>`
+                    <option selected value="0" disabled> Select </option>`
                 ;
                 for (let index = 0; index < data.length; index++) {
                     elemento = elemento + `<option value="`+data[index].id+`"> `+data[index].name+ ` </option>`;
@@ -61,7 +82,7 @@ $(document).ready(init);
                 elemento = `
                 <label for="origin_id" class="form-label">Origin</label>
                     <select name="origin_id" id="id" class="form-control">
-                    <option selected value="0" disabled> Elige una opción </option>`
+                    <option selected value="0" disabled> Select </option>`
                 ;
                 for (let index = 0; index < data.length; index++) {
                     elemento = elemento + `<option value="`+data[index].id+`"> `+data[index].name+ ` </option>`;
@@ -74,14 +95,14 @@ $(document).ready(init);
             function createListItem(i,item){
                 var e = `
                 <div class="row" >
-                    <div class="col-md-1"><div>`+item.id+`</div></div>
-                    <div class="col-md-1"><div>`+item.origin.name+`</div></div>
-                    <div class="col-md-1"><div>`+item.destination.name+`</div></div>
-                    <div class="col-md-1"><div>`+item.departure_date+`</div></div>
-                    <div class="col-md-1"><div>`+item.departure_time+`</div></div>
-                    <div class="col-md-1"><div>`+item.passengers_limit+`</div></div>
-                    <div class="col-md-1"><div>`+item.status.name+`</div></div>
-                    <div class="col-md-1"><div><a href="/delete?id=`+item.id+`">delete</a></div></div>
+                    <div class="col-1 themed-grid-col"><div>`+item.id+`</div></div>
+                    <div class="col-2 themed-grid-col"><div>`+item.origin.name+`</div></div>
+                    <div class="col-2 themed-grid-col"><div>`+item.destination.name+`</div></div>
+                    <div class="col-2 themed-grid-col"><div>`+item.departure_date+`</div></div>
+                    <div class="col-2 themed-grid-col"><div>`+item.departure_time+`</div></div>
+                    <div class="col-1 themed-grid-col"><div>`+item.passengers_limit+`</div></div>
+                    <div class="col-1 themed-grid-col"><div>`+item.status.name+`</div></div>
+                    <div class="col-1 themed-grid-col"><div><a href="/delete?id=`+item.id+`">delete</a></div></div>
                     </div>
                 `;
                 $('#tabla').append(e);
